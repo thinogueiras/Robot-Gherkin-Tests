@@ -1,0 +1,27 @@
+# Pabot
+pabot_results
+.pabotsuitenames
+
+# Logs
+logs
+reports
+results
+log.html
+output.xml
+report.html
+playwright-log.txt
+
+# Runtime data
+interactive_console_output.xml
+
+# Others
+.vscode
+.idea
+.DS_Store
+.classpath
+.settings
+.jython_cache
+.mypy_cache/
+.env
+venv*
+.venv*
