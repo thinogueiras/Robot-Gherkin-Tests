@@ -3,7 +3,8 @@ Documentation           Arquivo principal do projeto
 
 Library                 Browser
 
-Resource                pages/login-page.resource
+Resource                pages/LoginPage.resource
+Resource                pages/CartPage.resource
 
 *** Variables ***
 ${BROWSER}              Chromium
