@@ -1,0 +1,58 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    name: E2E Tests 🤖🤖
+
+    steps:
+      - name: Checkout 🚀🚀
+        uses: actions/checkout@v4
+
+      - name: Install dependencies ➕➕
+        run: pip install -r requirements.txt
+
+      - name: Initialize Browser Library (Playwright)
+        run: rfbrowser init
+
+      - name: E2E Tests 🧪🧪
+        run: robot -d ./reports tests/
+
+      - name: Upload Reports 📖📖
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Reports
+          path: reports
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Slack Notification - Success        
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: pipeline-notifications
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://cdn-icons-png.flaticon.com/512/1642/1642322.png
+          SLACK_TITLE: 'All tests passed successfully'          
+          SLACK_MESSAGE: ':robot:  Tests passed  :robot:'
+          SLACK_USERNAME: SUCCESS
+
+      - name: Slack Notification - Failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: pipeline-notifications
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://cdn-icons-png.flaticon.com/512/3271/3271351.png
+          SLACK_TITLE: 'Some tests failed'
+          SLACK_MESSAGE: ':fire:  Tests failed  :fire:'
+          SLACK_USERNAME: FAILURE

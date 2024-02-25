@@ -8,7 +8,7 @@ Resource                pages/CartPage.resource
 
 *** Variables ***
 ${BROWSER}              Chromium
-${HEADLESS}             ${False}
+${HEADLESS}             ${True}
 
 *** Keywords ***
 Start Test

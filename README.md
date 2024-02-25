@@ -1,20 +1,24 @@
 # Automação de Testes de UI com Robot Framework e Playwright.
 
+[![Robot Framework Tests](https://github.com/thinogueiras/Robot-Gherkin-Tests/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/thinogueiras/Robot-Gherkin-Tests/actions/workflows/ci.yml)
+
 ## Sobre o projeto:
 
 * Site alvo dos testes: <strong>https://www.saucedemo.com</strong>.
-* Este projeto utiliza o padrão `Page Objects`.
-* Os <strong>Casos de Testes</strong> foram implementados utilizando `Gherkin / BDD`.
+* Este projeto utiliza o padrão <strong>`Page Objects`</strong>.
+* Os <strong>`Casos de Testes`</strong> foram implementados utilizando <strong>`Gherkin`</strong> com a abordagem <strong>`declarativa`</strong>.
 
 ## Pré-requisitos mínimos de ambiente:
 
-* [Python](https://www.python.org/downloads/) 3.10.12.
+* [Git](https://git-scm.com/).
 
-* [Node.js](https://nodejs.org/en) 18.17.1.
+* [Python](https://www.python.org/downloads/) 3.11.x.
+
+* [Node.js](https://nodejs.org/en) 18.17.x.
 
 ## Clone do Repositório:
 
-```bash
+```
 git clone https://github.com/thinogueiras/Robot-Gherkin-Tests.git
 
 cd Robot-Gherkin-Tests
