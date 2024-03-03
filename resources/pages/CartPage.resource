@@ -54,14 +54,14 @@ Quando removo o produto do carrinho
 Quando retorno para a página principal
     Click               css=#continue-shopping
 
-Então visualizo o produto dentro do carrinho
+Então vejo o produto dentro do carrinho
     Wait For Condition  Text    css=.inventory_item_name    equals    Sauce Labs Bolt T-Shirt
 
-Então visualizo o carrinho vazio
+Então vejo o carrinho vazio
     Wait For Elements State     css=.cart_item    detached
 
-Então visualizo nome, descrição, quantidade e o preço do produto no carrinho
-    Então visualizo o produto dentro do carrinho
+Então vejo nome, descrição, quantidade e o preço do produto no carrinho
+    Então vejo o produto dentro do carrinho
 
     ${item_desc}        Set Variable        Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.
 
@@ -69,5 +69,5 @@ Então visualizo nome, descrição, quantidade e o preço do produto no carrinho
     Wait For Condition  Text    css=.inventory_item_price   equals    $15.99
     Wait For Condition  Text    css=.cart_quantity          equals    1
 
-Então visualizo a página principal
+Então vejo a página principal
     Check Page Secondary Header       Products

@@ -25,7 +25,7 @@ Fill Login Credentials
 Click On Login Button
     Click               css=#login-button
 
-Quando realizo login com o ${usuario} e ${senha}
+Quando faço login com o ${usuario} e ${senha}
     Fill Login Credentials            ${usuario}    ${senha}
     Click On Login button
 
