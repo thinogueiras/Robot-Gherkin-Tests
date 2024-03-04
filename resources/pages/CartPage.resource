@@ -7,7 +7,7 @@ Resource                ../helpers.resource
 
 *** Keywords ***
 Enter Product Page
-    [Arguments]         ${produto}=Sauce Labs Bolt T-Shirt
+    [Arguments]         ${produto}
 
     Click               xpath=//div[contains(@class, "inventory_item_name")][text()="${produto}"]
 
@@ -26,48 +26,67 @@ Go To Cart
 Remove Product
     Click               css=button >> text=Remove
 
+Check Product Details In Cart
+    [Arguments]             ${produto}      ${descricao}    ${price}    ${quantity}=1
+
+    ${xpath_pai}            Set Variable    //*[@class="inventory_item_name"][text()="${produto}"]
+
+    ${product_name}         Get Text        xpath=${xpath_pai}
+
+    ${product_desc}         Get Text        xpath=${xpath_pai}/../../*[@class="inventory_item_desc"]
+
+    ${product_price}        Get Text        xpath=${xpath_pai}/../../*[@class="item_pricebar"]/div
+
+    ${product_quantity}     Get Text        xpath=${xpath_pai}/../../../*[@class="cart_quantity"]
+
+    Should Be Equal         ${product_name}        ${produto}
+
+    Run Keyword And Continue On Failure        Should Be Equal         ${product_desc}        ${descricao}
+    Run Keyword And Continue On Failure        Should Be Equal         ${product_price}       ${price}
+    Run Keyword And Continue On Failure        Should Be Equal         ${product_quantity}    ${quantity}
+
 Dado que estou logado no Sauce Demo
     Login Successfully
 
-E tenho o produto "Sauce Labs Bolt T-Shirt" no carrinho
-    Click               css=#add-to-cart-sauce-labs-bolt-t-shirt
+E tenho o produto "${produto}" no carrinho
+    ${product}          Convert To Lower Case        ${produto}
+    ${product}          Replace String        ${product}        ${SPACE}        -
+
+    Click               css=#add-to-cart-${product}
     Check Quantity On Cart Badge      1
     Go To Cart
 
-E que estou na pagina do produto "${produto}"
+E que estou na página do produto "${produto}"
     Enter Product Page  ${produto}
 
-Quando adiciono o produto "Sauce Labs Bolt T-Shirt" ao carrinho
-    E tenho o produto "Sauce Labs Bolt T-Shirt" no carrinho
+Quando adiciono o produto "${produto}" ao carrinho
+    E tenho o produto "${produto}" no carrinho
 
-Quando adiciono o produto ao carrinho
-    E tenho o produto "Sauce Labs Bolt T-Shirt" no carrinho
-
-Quando removo o produto a partir da página do produto
-    Enter Product Page
+Quando removo o produto "${produto}" a partir da página do produto
+    Enter Product Page  ${produto}
     Remove Product
     Go To Cart
 
 Quando removo o produto do carrinho
     Remove Product
 
-Quando retorno para a página principal
+Quando continuo para a Shopping
     Click               css=#continue-shopping
 
-Então vejo o produto dentro do carrinho
-    Wait For Condition  Text    css=.inventory_item_name    equals    Sauce Labs Bolt T-Shirt
+Quando volto para os produtos
+    Click               css=#back-to-products
+
+Então vejo o produto "${produto}" dentro do carrinho
+    Wait For Condition  Text    css=.inventory_item_name    equals    ${produto}
 
 Então vejo o carrinho vazio
     Wait For Elements State     css=.cart_item    detached
 
-Então vejo nome, descrição, quantidade e o preço do produto no carrinho
-    Então vejo o produto dentro do carrinho
+Então vejo os detalhes do produto "${produto}" no carrinho
+    ${item_desc}        Set Variable          It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.
 
-    ${item_desc}        Set Variable        Get your testing superhero on with the Sauce Labs bolt T-shirt. From American Apparel, 100% ringspun combed cotton, heather gray with red bolt.
+    Check Product Details In Cart       ${produto}    descricao=${item_desc}    price=$49.99    quantity=1
 
-    Wait For Condition  Text    css=.inventory_item_desc    equals    ${item_desc}
-    Wait For Condition  Text    css=.inventory_item_price   equals    $15.99
-    Wait For Condition  Text    css=.cart_quantity          equals    1
-
-Então vejo a página principal
-    Check Page Secondary Header       Products
+Então vejo a página de produtos
+    Check Page Secondary Header     Products
+    Wait For Elements State         css=.inventory_list    visible
