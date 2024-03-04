@@ -22,7 +22,7 @@ jobs:
         run: rfbrowser init
 
       - name: E2E Tests 🧪🧪
-        run: robot -d ./reports tests/
+        run: robot -d ./reports -v HEADLESS:true tests/
 
       - name: Upload Reports 📖📖
         uses: actions/upload-artifact@v4
