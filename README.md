@@ -12,7 +12,9 @@
 
 * [Git](https://git-scm.com/).
 
-* [Python](https://www.python.org/downloads/) 3.11.x.
+* [Docker](https://www.docker.com/products/docker-desktop/) (Opcional).
+
+* [Python](https://www.python.org/downloads/) 3.12.x.
 
 * [Node.js](https://nodejs.org/en) 18.17.x.
 
@@ -52,6 +54,21 @@ robot -d ./reports -v BROWSER:Chromium -v HEADLESS:False tests/
 robot -d ./reports -v BROWSER:Firefox -v HEADLESS:False tests/
 ```
 
+## Docker:
+
+```
+docker pull ppodgorsek/robot-framework:latest
+```
+
+#### Aplicando permissão de execução:
+```
+chmod +x run-docker-tests-single-thread.bat
+```
+
+#### Executando o arquivo:
+```
+./run-docker-tests-single-thread.bat
+```
 ---
 
 ## Relatórios:
