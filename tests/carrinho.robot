@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation           Suíte de testes de carrinho
+Documentation           Funcionalidade: Carrinho de compras
 
 Resource                ../resources/base.resource
 
@@ -9,42 +9,42 @@ Test Teardown           Finish Test
 Default Tags            carrinho
 
 *** Test Cases ***
-Deve incluir produto no carrinho a partir da página de produtos
-    Dado que estou logado no Sauce Demo
-    Quando adiciono o produto "Sauce Labs Bolt T-Shirt" ao carrinho
-    Então vejo o produto "Sauce Labs Bolt T-Shirt" dentro do carrinho
+Cenário: Incluir produto no carrinho
+    Dado que o usuário está logado no sistema
+    Quando adicionar o produto "Sauce Labs Bolt T-Shirt" ao carrinho
+    Então o produto é adicionado com sucesso ao carrinho
 
-Deve incluir produto no carrinho a partir da página do produto
-    Dado que estou logado no Sauce Demo
-    E que estou na página do produto "Sauce Labs Fleece Jacket"
-    Quando adiciono o produto "Sauce Labs Fleece Jacket" ao carrinho
-    Então vejo o produto "Sauce Labs Fleece Jacket" dentro do carrinho
+Cenário: Incluir produto no carrinho a partir da página do produto
+    Dado que o usuário está logado no sistema
+    E que está na página do produto "Sauce Labs Bolt T-Shirt"
+    Quando adicionar o produto ao carrinho
+    Então o produto é adicionado com sucesso ao carrinho
 
-Deve remover produto do carrinho a partir da página de produtos
-    Dado que estou logado no Sauce Demo
-    E tenho o produto "Sauce Labs Bike Light" no carrinho
-    Quando removo o produto do carrinho
-    Então vejo o carrinho vazio
+Cenário: Remover produto do carrinho
+    Dado que o usuário está logado no sistema
+    E que o produto "Sauce Labs Bike Light" está no carrinho
+    Quando remover o produto do carrinho
+    Então o carrinho fica vazio
 
-Deve remover produto do carrinho a partir da página do produto
-    Dado que estou logado no Sauce Demo
-    E tenho o produto "Sauce Labs Backpack" no carrinho
-    Quando removo o produto "Sauce Labs Backpack" a partir da página do produto
-    Então vejo o carrinho vazio
+Cenário: Remover produto do carrinho a partir da página do produto
+    Dado que o usuário está logado no sistema
+    E que o produto "Sauce Labs Backpack" está no carrinho
+    Quando remover o produto a partir da página do produto
+    Então o carrinho fica vazio
 
-Deve visualizar os detalhes do produto no carrinho
-    Dado que estou logado no Sauce Demo
-    Quando adiciono o produto "Sauce Labs Fleece Jacket" ao carrinho
-    Então vejo os detalhes do produto "Sauce Labs Fleece Jacket" no carrinho
+Cenário: Visualizar os detalhes do produto no carrinho
+    Dado que o usuário está logado no sistema
+    Quando adicionar o produto "Sauce Labs Fleece Jacket" ao carrinho
+    Então os detalhes do produto serão exibidos no carrinho
 
-Deve retornar para a página de produtos a partir do carrinho
-    Dado que estou logado no Sauce Demo
-    E tenho o produto "Sauce Labs Onesie" no carrinho
-    Quando continuo para a Shopping
-    Então vejo a página de produtos
+Cenário: Retornar para a página de produtos a partir do carrinho
+    Dado que o usuário está logado no sistema
+    E que o produto "Sauce Labs Bike Light" está no carrinho
+    Quando continuar para o Shopping
+    Então a página de produtos é exibida com sucesso
 
-Deve retornar para a página de produtos a partir da página de um produto
-    Dado que estou logado no Sauce Demo
-    E que estou na página do produto "Sauce Labs Onesie"
-    Quando volto para os produtos
-    Então vejo a página de produtos
+Cenário: Retornar para a página de produtos a partir da página de um produto
+    Dado que o usuário está logado no sistema
+    E que está na página do produto "Sauce Labs Onesie"
+    Quando voltar para a página de produtos
+    Então a página de produtos é exibida com sucesso

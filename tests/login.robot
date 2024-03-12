@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation           Suíte de testes de login
+Documentation           Funcionalidade: Login
 
 Resource                ../resources/base.resource
 
@@ -8,49 +8,38 @@ Test Teardown           Finish Test
 
 Default Tags            login
 
-*** Variables ***
-${USER_CORRETO}         standard_user
-${USER_INCORRETO}       thiago_user
-${SENHA_CORRETA}        secret_sauce
-${SENHA_INCORRETA}      sauce_secret
-${USER_VAZIO}           ${EMPTY}
-${SENHA_VAZIA}          ${EMPTY}
-${USER_BLOQUEADO}       locked_out_user
-
 *** Test Cases ***
-Deve logar com sucesso
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_CORRETO} e ${SENHA_CORRETA}
-    Então sou redirecionado para a página principal
+Cenário: Login com sucesso
+    Dado que o usuário está na página de login
+    Quando realizar login com credenciais válidas
+    Então é redirecionado para a página principal
 
-Deve validar usuário incorreto
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_INCORRETO} e ${SENHA_CORRETA}
+Cenário: Validar usuário incorreto
+    Dado que o usuário está na página de login
+    Quando realizar login com um usuário incorreto
     Então o sistema exibe a mensagem: "Username and password do not match any user in this service"
 
-Deve validar senha incorreta
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_CORRETO} e ${SENHA_INCORRETA}
+Cenário: Validar senha incorreta
+    Dado que o usuário está na página de login
+    Quando realizar login com uma senha incorreta
     Então o sistema exibe a mensagem: "Username and password do not match any user in this service"
 
-Deve validar usuário obrigatório
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_VAZIO} e ${SENHA_CORRETA}
+Cenário: Validar usuário obrigatório
+    Dado que o usuário está na página de login
+    Quando realizar login sem informar um usuário
     Então o sistema exibe a mensagem: "Username is required"
 
-Deve validar senha obrigatória
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_CORRETO} e ${SENHA_VAZIA}
+Cenário: Validar senha obrigatória
+    Dado que o usuário está na página de login
+    Quando realizar login sem informar uma senha
     Então o sistema exibe a mensagem: "Password is required"
 
-Deve validar usuário e senha não informados
-    [Documentation]        Testa a tentativa de login clicando diretamente no botão "Login".
-
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_VAZIO} e ${SENHA_VAZIA}
+Cenário: Validar usuário e senha obrigatórios
+    Dado que o usuário está na página de login
+    Quando realizar login sem informar as credenciais
     Então o sistema exibe a mensagem: "Username is required"
 
-Deve validar usuário bloqueado no sistema
-    Dado que estou no site Sauce Demo
-    Quando faço login com o ${USER_BLOQUEADO} e ${SENHA_CORRETA}
+Cenário: Validar usuário bloqueado no sistema
+    Dado que o usuário está na página de login
+    Quando realizar login com um usuário bloqueado
     Então o sistema exibe a mensagem: "Sorry, this user has been locked out."

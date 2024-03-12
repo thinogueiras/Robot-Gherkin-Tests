@@ -15,4 +15,5 @@ Login Successfully
     Go To Page
     Fill Login Credentials        standard_user    secret_sauce
     Click On Login Button
-    Check Page Secondary Header   Products
+    Click                         css=#react-burger-menu-btn
+    Wait For Condition            Text      css=#logout_sidebar_link    equals    Logout

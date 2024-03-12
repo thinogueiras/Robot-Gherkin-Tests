@@ -11,7 +11,7 @@ Enter Product Page
 
     Click               xpath=//div[contains(@class, "inventory_item_name")][text()="${produto}"]
 
-    Check Page Secondary Header       Back to products
+    Wait For Condition  Text    css=.inventory_details_name    equals    ${produto}
 
 Check Quantity On Cart Badge
     [Arguments]         ${quantity}
@@ -45,10 +45,10 @@ Check Product Details In Cart
     Run Keyword And Continue On Failure        Should Be Equal         ${product_price}       ${price}
     Run Keyword And Continue On Failure        Should Be Equal         ${product_quantity}    ${quantity}
 
-Dado que estou logado no Sauce Demo
+Dado que o usuário está logado no sistema
     Login Successfully
 
-E tenho o produto "${produto}" no carrinho
+E que o produto "${produto}" está no carrinho
     ${product}          Convert To Lower Case        ${produto}
     ${product}          Replace String        ${product}        ${SPACE}        -
 
@@ -56,37 +56,48 @@ E tenho o produto "${produto}" no carrinho
     Check Quantity On Cart Badge      1
     Go To Cart
 
-E que estou na página do produto "${produto}"
+E que o produto está no carrinho
+    ${product}          Convert To Lower Case        Sauce Labs Bolt T-Shirt
+    ${product}          Replace String        ${product}        ${SPACE}        -
+
+    Click               css=#add-to-cart-${product}
+    Check Quantity On Cart Badge      1
+    Go To Cart
+
+E que está na página do produto "${produto}"
     Enter Product Page  ${produto}
 
-Quando adiciono o produto "${produto}" ao carrinho
-    E tenho o produto "${produto}" no carrinho
+Quando adicionar o produto "${produto}" ao carrinho
+    E que o produto "${produto}" está no carrinho
 
-Quando removo o produto "${produto}" a partir da página do produto
-    Enter Product Page  ${produto}
+Quando adicionar o produto ao carrinho
+    E que o produto está no carrinho
+
+Quando remover o produto a partir da página do produto
+    Enter Product Page  Sauce Labs Backpack
     Remove Product
     Go To Cart
 
-Quando removo o produto do carrinho
+Quando remover o produto do carrinho
     Remove Product
 
-Quando continuo para a Shopping
+Quando continuar para o Shopping
     Click               css=#continue-shopping
 
-Quando volto para os produtos
+Quando voltar para a página de produtos
     Click               css=#back-to-products
 
-Então vejo o produto "${produto}" dentro do carrinho
-    Wait For Condition  Text    css=.inventory_item_name    equals    ${produto}
+Então o produto é adicionado com sucesso ao carrinho
+    Wait For Condition  Text    css=.inventory_item_name    equals    Sauce Labs Bolt T-Shirt
 
-Então vejo o carrinho vazio
+Então o carrinho fica vazio
     Wait For Elements State     css=.cart_item    detached
 
-Então vejo os detalhes do produto "${produto}" no carrinho
+Então os detalhes do produto serão exibidos no carrinho
     ${item_desc}        Set Variable          It's not every day that you come across a midweight quarter-zip fleece jacket capable of handling everything from a relaxing day outdoors to a busy day at the office.
 
-    Check Product Details In Cart       ${produto}    descricao=${item_desc}    price=$49.99    quantity=1
+    Check Product Details In Cart       Sauce Labs Fleece Jacket    descricao=${item_desc}    price=$49.99    quantity=1
 
-Então vejo a página de produtos
+Então a página de produtos é exibida com sucesso
     Check Page Secondary Header     Products
     Wait For Elements State         css=.inventory_list    visible
