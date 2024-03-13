@@ -14,16 +14,16 @@
 
 * [Docker](https://www.docker.com/products/docker-desktop/) (Opcional).
 
-* [Python](https://www.python.org/downloads/) 3.12.x.
+* [Python](https://www.python.org/downloads/) 3.11.x.
 
 * [Node.js](https://nodejs.org/en) 18.17.x.
 
 ## Clone do Repositório:
 
 ```
-git clone https://github.com/thinogueiras/Robot-Gherkin-Tests.git
+git clone https://github.com/thinogueiras/Robot-Playwright-Gherkin.git
 
-cd Robot-Gherkin-Tests
+cd Robot-Playwright-Gherkin
 ```
 
 ## Instalação do projeto:
