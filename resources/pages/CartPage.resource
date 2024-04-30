@@ -57,10 +57,7 @@ E que o produto "${produto}" está no carrinho
     Go To Cart
 
 E que o produto está no carrinho
-    ${product}          Convert To Lower Case        Sauce Labs Bolt T-Shirt
-    ${product}          Replace String        ${product}        ${SPACE}        -
-
-    Click               css=#add-to-cart-${product}
+    Click               css=#add-to-cart
     Check Quantity On Cart Badge      1
     Go To Cart
 
